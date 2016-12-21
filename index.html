@@ -1,0 +1,89 @@
+<DOCTYPE HTML>
+
+<html lang="en-US" >
+<meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css\style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script>
+<script src="js/app.js"> </script>
+<script src="js/controllers/list.js"></script>
+
+
+	<head>
+		<title></title>
+	</head>
+
+	<body ng-app="turtleFacts">
+			
+		<div ng-controller="listCtrl as list">			
+			<div class="row">
+				<div class="col-sm-6" ng-repeat="turtle in list.data">
+					<div class="well well-sm">
+						<div class="row">
+							<div class="col-sm-6">
+								<img ng-src="{{turtle.image_url}}" class="img-rounded img-responsive well-image">
+							</div>
+							<div class="col-sm-6"> 
+								<h4>{{turtle.type}}</h4>
+								<p><strong>Locations: </strong> {{turtle.locations}}</p>
+								<p><strong>Size: </strong> {{turtle.size}}</p>
+								<p><strong>Average Lifespan: </strong> {{turtle.lifespan}}</p>
+								<p><strong>Diet: </strong> {{turtle.diet}}</p>
+
+								<button class="btn btn-primary pull-right"                                    
+                                    	data-toggle="modal"
+                                    	ng-click="list.changeActiveTurtle(turtle)"
+                                    	data-target="#turtle-info"
+                                    	>Learn More
+                                </button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+            <div class="modal" id="turtle-info">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        	<!-- more usage of angular data binding -->
+                            <h2>{{list.activeTurtle.type}}</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-8 col-xs-offset-2">
+                                	<!-- ng-src used again instead of src -->
+                                    <img ng-src="{{list.activeTurtle.image_url}}" class="img-rounded img-responsive">
+                                </div>
+                            </div>
+                            <div class="row top-buffer">
+                                <div class="col-md-6">
+                                	<!-- angular data binding -->
+                                    <p><strong>Locations: </strong>{{list.activeTurtle.locations}}</p>
+                                    <p><strong>Size: </strong>{{list.activeTurtle.size}}</p>
+                                    <p><strong>Average Lifespan: </strong>{{list.activeTurtle.lifespan}}</p>
+                                    <p><strong>Diet: </strong>{{list.activeTurtle.diet}}</p>
+                                </div>
+                                <div class="col-xs-12 top-buffer">
+                                	<!-- angular data binding and data-dismiss for bootstrap -->
+                                    <p>{{list.activeTurtle.description}}</p>
+                                    <button class="btn btn-danger pull-right" 
+                                        data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- List Controller -->
+
+
+	</body>
+
+</html>
